@@ -8,18 +8,14 @@ public class MyLinkedList<E> implements ILinkedList<E> {
     private Node<E> last;
     private int size;
 
-    public MyLinkedList(Node<E> first, Node<E> last, int size) {
-        this.first = first;
-        this.last = last;
-        this.size = size;
-    }
-
     public MyLinkedList() {
+        first = new Node<>(null,null,null);
+        last = new Node<>(null,null,null);
     }
 
     private void addLast(E element) {
         if (size == 0) {
-            first = new Node<E> (element);
+            first.setElement(element); //= new Node<E> (element);
             last = first;
         }
         else {
@@ -29,6 +25,7 @@ public class MyLinkedList<E> implements ILinkedList<E> {
         }
         size++;
     }
+
 
     @Override
     public void add(E element) {
@@ -42,7 +39,7 @@ public class MyLinkedList<E> implements ILinkedList<E> {
             return;
         }
 
-        if(size == 0 || size == index)
+        if(size == index)
             addLast(element);
         else {
             if (index == 0) {
@@ -51,10 +48,10 @@ public class MyLinkedList<E> implements ILinkedList<E> {
                 size++;
             }
             else {
-                Node<E> succ = node(index);
-                final Node<E> pred = succ.getPrevNode();
-                final Node<E> newNode = new Node<>(pred, element, succ);
-                succ.setPrevNode(newNode);
+                Node<E> current = node(index);
+                final Node<E> pred = current.getPrevNode();
+                final Node<E> newNode = new Node<>(pred, element, current);
+                current.setPrevNode(newNode);
                 pred.setNextNode(newNode);
                 size++;
             }
@@ -81,12 +78,8 @@ public class MyLinkedList<E> implements ILinkedList<E> {
             System.out.println("Out of range");
             return null;
         }
-
-        Node<E> element = first;
-        for (int i = 0; i < index; i++) {
-            element = element.getNextNode();
-        }
-        return element.getElement();
+        Node<E> current = node(index);
+        return current.getElement();
     }
 
     @Override
@@ -165,15 +158,14 @@ public class MyLinkedList<E> implements ILinkedList<E> {
     }
 
     @Override
-    public E[] toArray() {
-        E[] elementsArray;
-        elementsArray = (E[]) java.lang.reflect.Array.newInstance(first.getNextNode().getElement().getClass(), size);
+    public Object[] toArray() {
+        Object[] elementsArray = new Object[size];
         int i = 0;
-        for (Node<E> x = first; x != last; x = x.getNextNode()) {
+        for (Node<E> x = first; x != null; x = x.getNextNode()) {
             elementsArray[i] = x.getElement();
             i++;
         }
-        elementsArray[i] = last.getElement();
+//        elementsArray[i] = last.getElement();
         return elementsArray;
 
     }
@@ -186,11 +178,10 @@ public class MyLinkedList<E> implements ILinkedList<E> {
         }
 
         Object[] tempArray = array;
-        for (Node<E> x = first; x != last; x = x.getNextNode()) {
+        for (Node<E> x = first; x != null; x = x.getNextNode()) {
             tempArray[i] = x.getElement();
             i++;
         }
-        tempArray[i] = last.getElement();
 
         if (array.length > size) {
             array[size] = null;
@@ -203,11 +194,10 @@ public class MyLinkedList<E> implements ILinkedList<E> {
     public String toString() {
         String str = "";
         str = "MyLinkedList: ";
-        for (Node<E> x = first; x != last; x = x.getNextNode()) {
+        for (Node<E> x = first; x != null; x = x.getNextNode()) {
             str += x.getElement() + ", ";
         }
-        str += last.getElement();
-//        str = str.substring(0, str.length() - 2);
+        str = str.substring(0, str.length() - 2);
 
         return str;
     }

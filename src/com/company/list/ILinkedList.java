@@ -19,7 +19,7 @@ public interface ILinkedList<E> extends Iterable<E> {
 
     int size ();
 
-    E[] toArray();
+    Object[] toArray();
 
     <T> T[] toArray(T[] array);
 
