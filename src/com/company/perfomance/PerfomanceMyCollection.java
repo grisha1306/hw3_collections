@@ -1,4 +1,4 @@
-package com.company.speedtest.perfomance;
+package com.company.perfomance;
 
 import com.company.list.ILinkedList;
 
@@ -16,35 +16,40 @@ public class PerfomanceMyCollection<T> {
         this.size = size;
     }
 
-    public void addPerfomance (ILinkedList<T> list, T[] t) throws IOException {
+    public void addPerfomance (ILinkedList<T> list, T[] t) {
         String fileName = list.getClass().toString();
-        FileWriter writer = new FileWriter("./first_task/add" + fileName + ".txt");
-        long[] arrayForEstimatedTime = new long[size];
+        try {
+            FileWriter writer = new FileWriter("./first_task/add" + fileName + ".txt");
+            long[] arrayForEstimatedTime = new long[size];
 
-        int halfOFSize = (int) size / 2;
-        for (int i = 0; i < halfOFSize; i++) {
-            startTime = System.nanoTime();
-            list.add(t[i]);
-            endTime = System.nanoTime();
-            estimatedTime = endTime - startTime;
-            arrayForEstimatedTime[i] = estimatedTime;
-            writer.write(Long.toString(arrayForEstimatedTime[i]));
-            writer.write(" ");
-        }
+            int halfOFSize = (int) size / 2;
+            for (int i = 0; i < halfOFSize; i++) {
+                startTime = System.nanoTime();
+                list.add(t[i]);
+                endTime = System.nanoTime();
+                estimatedTime = endTime - startTime;
+                arrayForEstimatedTime[i] = estimatedTime;
+                writer.write(Long.toString(arrayForEstimatedTime[i]));
+                writer.write(" ");
+            }
 
-        for (int i = halfOFSize; i < size ; i++) {
-            startTime = System.nanoTime();
-            list.add(halfOFSize, t[i]);
-            estimatedTime = System.nanoTime() - startTime;
-            arrayForEstimatedTime[i] = estimatedTime;
-            writer.write(Long.toString(arrayForEstimatedTime[i]));
-            writer.write(" ");
+            for (int i = halfOFSize; i < size; i++) {
+                startTime = System.nanoTime();
+                list.add(halfOFSize, t[i]);
+                estimatedTime = System.nanoTime() - startTime;
+                arrayForEstimatedTime[i] = estimatedTime;
+                writer.write(Long.toString(arrayForEstimatedTime[i]));
+                writer.write(" ");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        writer.close();
     }
 
-    public void getPerfomance (ILinkedList<T> list) throws IOException {
+    public void getPerfomance (ILinkedList<T> list)  {
         String fileName = list.getClass().toString();
+        try {
         FileWriter writer = new FileWriter("./first_task/get" + fileName + ".txt");
         long[] arrayForEstimatedTime = new long[size];
 
@@ -58,10 +63,14 @@ public class PerfomanceMyCollection<T> {
             writer.write(" ");
         }
         writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void removePerfomance (ILinkedList<T> list) throws IOException {
+    public void removePerfomance (ILinkedList<T> list)  {
         String fileName = list.getClass().toString();
+        try {
         FileWriter writer = new FileWriter("./first_task/remove" + fileName + ".txt");
         long[] arrayForEstimatedTime = new long[size];
 
@@ -75,6 +84,9 @@ public class PerfomanceMyCollection<T> {
             writer.write(" ");
         }
         writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

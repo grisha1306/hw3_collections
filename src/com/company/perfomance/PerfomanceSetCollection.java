@@ -1,6 +1,4 @@
-package com.company.speedtest.perfomance;
-
-import com.company.list.ILinkedList;
+package com.company.perfomance;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,8 +14,9 @@ public class PerfomanceSetCollection<T> {
         this.size = size;
     }
 
-    public void addPerfomance (Set<T> set, T[] t) throws IOException {
+    public void addPerfomance (Set<T> set, T[] t) {
         String fileName = set.getClass().toString();
+        try {
         FileWriter writer = new FileWriter("./second_task/set/add" + fileName + ".txt");
         long[] arrayForEstimatedTime = new long[size];
 
@@ -31,10 +30,14 @@ public class PerfomanceSetCollection<T> {
             writer.write(" ");
         }
         writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void getPerfomance (Set<T> set, T[] t) throws IOException {
+    public void getPerfomance (Set<T> set, T[] t) {
         String fileName = set.getClass().toString();
+        try {
         FileWriter writer = new FileWriter("./second_task/set/get" + fileName + ".txt");
         long[] arrayForEstimatedTime = new long[size];
 
@@ -48,10 +51,14 @@ public class PerfomanceSetCollection<T> {
             writer.write(" ");
         }
         writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void removePerfomance (Set<T> set, T[] t) throws IOException {
+    public void removePerfomance (Set<T> set, T[] t) {
         String fileName = set.getClass().toString();
+        try {
         FileWriter writer = new FileWriter("./second_task/set/remove" + fileName + ".txt");
         long[] arrayForEstimatedTime = new long[size];
 
@@ -65,5 +72,8 @@ public class PerfomanceSetCollection<T> {
             writer.write(" ");
         }
         writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

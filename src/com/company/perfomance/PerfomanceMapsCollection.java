@@ -1,4 +1,4 @@
-package com.company.speedtest.perfomance;
+package com.company.perfomance;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,8 +22,9 @@ public class PerfomanceMapsCollection<K,V> {
 //        }
 //    }
 
-    public void addPerfomance (Map<Integer,V> map, V[] v, Integer[] arrayOfKeys) throws IOException {
+    public void addPerfomance (Map<Integer,V> map, V[] v, Integer[] arrayOfKeys)  {
         String fileName = map.getClass().toString();
+        try {
         FileWriter writer = new FileWriter("./second_task/map/add" + fileName + ".txt");
         long[] arrayForEstimatedTime = new long[size];
 
@@ -38,10 +39,14 @@ public class PerfomanceMapsCollection<K,V> {
             writer.write(" ");
         }
         writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void getPerfomance (Map<Integer,V> map, Integer[] arrayOfKeys) throws IOException {
+    public void getPerfomance (Map<Integer,V> map, Integer[] arrayOfKeys) {
         String fileName = map.getClass().toString();
+        try {
         FileWriter writer = new FileWriter("./second_task/map/get" + fileName + ".txt");
         long[] arrayForEstimatedTime = new long[size];
 
@@ -55,10 +60,14 @@ public class PerfomanceMapsCollection<K,V> {
             writer.write(" ");
         }
         writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void removePerfomance (Map<Integer,V> map, Integer[] arrayOfKeys) throws IOException {
+    public void removePerfomance (Map<Integer,V> map, Integer[] arrayOfKeys) {
         String fileName = map.getClass().toString();
+        try {
         FileWriter writer = new FileWriter("./second_task/map/remove" + fileName + ".txt");
         long[] arrayForEstimatedTime = new long[size];
 
@@ -72,5 +81,8 @@ public class PerfomanceMapsCollection<K,V> {
             writer.write(" ");
         }
         writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
