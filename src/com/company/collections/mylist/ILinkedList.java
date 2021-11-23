@@ -1,6 +1,4 @@
-package com.company.list;
-
-import java.util.Iterator;
+package com.company.collections.mylist;
 
 public interface ILinkedList<E> extends Iterable<E> {
     void add (E element);

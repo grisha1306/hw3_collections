@@ -1,4 +1,4 @@
-package com.company.perfomance;
+package com.company.test.perfomance;
 
 import java.io.FileWriter;
 import java.io.IOException;

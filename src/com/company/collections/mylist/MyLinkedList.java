@@ -1,4 +1,4 @@
-package com.company.list;
+package com.company.collections.mylist;
 
 import java.util.Iterator;
 

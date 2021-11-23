@@ -1,6 +1,6 @@
-package com.company.perfomance;
+package com.company.test.perfomance;
 
-import com.company.list.ILinkedList;
+import com.company.collections.mylist.ILinkedList;
 
 import java.io.FileWriter;
 import java.io.IOException;

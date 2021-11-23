@@ -1,4 +1,6 @@
-package com.company.list;
+package com.company.collections;
+
+import com.company.collections.mylist.MyLinkedList;
 
 import java.util.*;
 
